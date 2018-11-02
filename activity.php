@@ -15,23 +15,15 @@
 				<th>Nombre de places maximum</th>
 			</tr>
 			<?php 
-				ini_set('display_errors', 1);
 				require("connect.php");
-				$activityTable = $db->query('SELECT * FROM activity');
-				while($datas=$activityTable->fetch())
-				{
-					echo
-	     				'<tr>
-	     					<td>' . $datas['activity_name'] . '</td>
-	     					<td>' . $datas['activity_type'] . '</td>
-	     					<td>' . $datas['activity_number_max_child'] . '</td>
-	     				</tr>';
-	     		}
+				require("function.php");
+				displayActivities($db);
 			?>
 		</table>
 		<form method="post">
 			<button class="btn btn-success" name="displayChildren" type="submit">Afficher les enfants</button>
 			<button class="btn btn-success" name="editChildren" type="submit">Gérer les enfants</button>			
+			<button class="btn btn-success" name="addActivity" type="submit">Ajouter une activité</button>		
 		</form>
 		<?php 
 			if(isset($_POST['displayChildren']))
@@ -44,7 +36,10 @@
 				header("Location: admin.php");
 			}
 
-
+			if(isset($_POST['addActivity']))
+			{
+				header("Location: addActivity.php");
+			}
 		?>
 	</body>
 </html>
